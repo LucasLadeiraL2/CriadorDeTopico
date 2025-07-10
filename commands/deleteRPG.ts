@@ -1,13 +1,16 @@
 import db from '../data/database';
-import { RPGTable } from '../data/tableTypes';
+
+interface selectUser {
+    user_id: string;
+}
 
 function deleteRPG(abbreviation:string, user_id:string): string {
-    const check = db.prepare(`SELECT 1 FROM rpg WHERE abbreviation = ?`).get(abbreviation) as RPGTable | undefined;
+    const check = db.prepare(`SELECT user_id FROM rpg WHERE abbreviation = ?`).get(abbreviation) as selectUser | undefined;
 
     if (!check) {
         return `RPG **${abbreviation}** not found.`;
     }
-    console.log(check);
+
     if (check.user_id === user_id) {
         db.prepare(`DELETE FROM rpg WHERE abbreviation = ?`).run(abbreviation);
         return `RPG **${abbreviation}** has been deleted successfully.`;
