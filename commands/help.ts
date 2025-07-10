@@ -5,7 +5,9 @@ Example:
 \`\`\`$create $RPGName $ 
 Topic1 
 Topic2\`\`\`
-- **$list**: List all RPGs available in the database.`;
+- **$list**: List all RPGs available in the database.
+- **$delete $<rpgName>**: Delete the specified RPG and its associated topics.
+- **$update $<rpgName> $[topics]**: Update the topics of an existing RPG.`;
 }
 
 export { help };
