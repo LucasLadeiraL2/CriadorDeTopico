@@ -49,11 +49,11 @@ client.on('messageCreate', async (message) => {
         const sentMessage = await message.channel.send(`Are you sure you want to create the RPG **${rpgName}** topics in channel ${message.channel}? React with ✅ in 4s to confirm.`);
         sentMessage.react('✅');
 
-        setTimeout(() => {
+        setTimeout(async () => {
           const reaction = sentMessage.reactions.cache.get('✅');
-          if (!reaction) return message.channel.send('Nenhuma reação encontrada.');
+          if (!reaction) return await message.channel.send('Nenhuma reação encontrada.');
 
-          reaction.users.fetch();
+          await reaction.users.fetch();
 
           const hasReacted = reaction.users.cache.has(message.author.id);
 
@@ -61,23 +61,23 @@ client.on('messageCreate', async (message) => {
             const topics = createTopics(rpgName);
             
             if (!topics) {
-              return message.channel.send(`No topics found for RPG **${rpgName}**.`);
+              return await message.channel.send(`No topics found for RPG **${rpgName}**.`);
             }
 
             const textChannel = message.channel as TextChannel;
 
-            topics.forEach(topic => {
-              textChannel.threads.create({
+            topics.forEach(async topic => {
+              await textChannel.threads.create({
                 name: topic,
                 autoArchiveDuration: Number.MAX_VALUE, // Archive after 60 minutes of inactivity
                 reason: `Creating topic for RPG ${rpgName}`,
                 type: ChannelType.PublicThread,
                 invitable: true,
                 startMessage: `${textChannel.name} - ${topic}`
-              })
+              });
             });
           } else {
-            message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
+            await message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
           }
         }, 4000);
       }
