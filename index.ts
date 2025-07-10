@@ -72,6 +72,7 @@ client.on('messageCreate', async (message) => {
                 autoArchiveDuration: Number.MAX_VALUE, // Archive after 60 minutes of inactivity
                 reason: `Creating topic for RPG ${rpgName}`,
                 type: ChannelType.PublicThread,
+                rateLimitPerUser: 0,
                 invitable: true,
                 startMessage: `${textChannel.name} - ${topic}`
               });

@@ -14,7 +14,7 @@ function createTopics(abbreviation: string): string[] | null {
     
     console.log(`Topics for RPG ${abbreviation}: ${topics.topics}`);
 
-    return topics.topics.split('\n').map(topic => topic.trim()).filter(topic => topic !== '');
+    return topics.topics.split(' ').map(topic => topic.trim()).filter(topic => topic !== '');
 }
 
 export { createTopics };
