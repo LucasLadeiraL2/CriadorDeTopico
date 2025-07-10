@@ -25,11 +25,13 @@ client.on('messageCreate', (message) => {
   if (message.author.bot) return;
 
   const MessageContent = message.content.toLowerCase().trim();
-  console.log(`Received Message: ${MessageContent}`);
   const MessageCommands = MessageContent.split('$');
-  console.log(`Received Commands: ${MessageCommands}`);
+
+  if (MessageCommands.length < 2) {
+    return;
+  }
+  
   const firstCommand = MessageCommands[1].trim();
-  console.log(`Received command: ${firstCommand}`);
 
   if (firstCommand === 'create') {
     const rpgName = MessageCommands[2].trim();
