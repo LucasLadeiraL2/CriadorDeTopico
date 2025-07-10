@@ -6,7 +6,7 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS rpg (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id TEXT NOT NULL,
-    abbreviation TEXT NOT NULL,
+    abbreviation TEXT NOT NULL UNIQUE,
     topics TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
