@@ -7,6 +7,7 @@ function listRPGs(): string {
     if (abbreviation.length === 0) {
         return "No RPGs found.";
     }
+    
     return `Available RPGs: ${abbreviation.join(', ')}`;
 }
 
