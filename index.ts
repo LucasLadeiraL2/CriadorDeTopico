@@ -1,5 +1,5 @@
 import db from "./data/database";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, Message } from "discord.js";
 import { config } from "dotenv";
 //import { createTopics } from "./commands/createTopics";
 import { createRPG } from "./commands/createRPG";
@@ -23,8 +23,9 @@ client.once("ready", () => {
 
 client.on('messageCreate', (message) => {
   const MessageContent = message.content.toLowerCase().trim();
-  const MessageCommands = message.content.split('$');
+  const MessageCommands = MessageContent.split('$');
   const firstCommand = MessageCommands[0].trim();
+  console.log(`Received command: ${firstCommand}`);
   
   if (firstCommand === 'create') {
     const rpgName = MessageCommands[1].trim();
