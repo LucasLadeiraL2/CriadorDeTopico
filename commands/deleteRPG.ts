@@ -7,7 +7,7 @@ function deleteRPG(abbreviation:string, user_id:string): string {
     if (!check) {
         return `RPG **${abbreviation}** not found.`;
     }
-
+    console.log(check);
     if (check.user_id === user_id) {
         db.prepare(`DELETE FROM rpg WHERE abbreviation = ?`).run(abbreviation);
         return `RPG **${abbreviation}** has been deleted successfully.`;
