@@ -1,5 +1,7 @@
-function deleteRPG(abbreviation:string, user_id:string) {
+import db from '../data/database';
+
+function deleteRPG(abbreviation:string, user_id:string): string {
 
 }
 
-export default deleteRPG;
+export { deleteRPG };

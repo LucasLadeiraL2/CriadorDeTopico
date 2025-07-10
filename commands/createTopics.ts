@@ -1,5 +1,7 @@
-function createTopics(abbreviation: string) {
+import db from '../data/database';
+
+function createTopics(abbreviation: string): string {
 
 }
 
-export default createTopics;
+export { createTopics };
