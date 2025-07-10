@@ -3,8 +3,9 @@ import { Client, GatewayIntentBits, ChannelType, TextChannel } from "discord.js"
 import { config } from "dotenv";
 import { createTopics } from "./commands/createTopics";
 import { createRPG } from "./commands/createRPG";
-//import { deleteRPG } from "./commands/deleteRPG";
+import { deleteRPG } from "./commands/deleteRPG";
 import { listRPGs } from "./commands/listRPGs";
+import { help } from "./commands/help";
 //import { updateRPG } from "./commands/updateRPG";
 
 config();
@@ -60,8 +61,6 @@ client.on('messageCreate', async (message) => {
           if (hasReacted) {
             const topics = createTopics(rpgName);
             
-            console.log(topics);
-
             if (!topics) {
               return await message.channel.send(`No topics found for RPG **${rpgName}**.`);
             }
@@ -85,6 +84,17 @@ client.on('messageCreate', async (message) => {
 
   if (firstCommand === 'list') {
     await message.reply(listRPGs());
+  }
+
+  if (firstCommand === 'delete') {
+    const rpgName = MessageCommands[2].trim();
+    if (rpgName) {
+      await message.reply(deleteRPG(rpgName, message.author.id));
+    }
+  }
+
+  if (firstCommand === 'help') {
+    await message.reply(help());
   }
 });
 
