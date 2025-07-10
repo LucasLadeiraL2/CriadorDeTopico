@@ -11,7 +11,7 @@ function createTopics(abbreviation: string): string[] | null {
     if (!results) {
         return null;
     }
-    console.log(results.topics);
+
     return results.topics.split('\n').map(topic => topic.trim()).filter(topic => topic !== '');
 }
 

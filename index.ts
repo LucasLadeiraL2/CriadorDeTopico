@@ -60,6 +60,8 @@ client.on('messageCreate', async (message) => {
           if (hasReacted) {
             const topics = createTopics(rpgName);
             
+            console.log(topics);
+
             if (!topics) {
               return await message.channel.send(`No topics found for RPG **${rpgName}**.`);
             }
