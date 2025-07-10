@@ -3,10 +3,12 @@
     "better-sqlite3": "^12.2.0",
     "bufferutil": "^4.0.9",
     "discord.js": "^14.21.0",
+    "dotenv": "^17.2.0",
     "zlib-sync": "^0.1.10"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^24.0.12",
     "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
@@ -16,6 +18,9 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
     "lint": "eslint src/**/*.ts"
   }
 }

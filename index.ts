@@ -1,4 +1,4 @@
-import db from "./database";
+import db from "./data/database";
 import { Client, GatewayIntentBits } from "discord.js";
 import { config } from "dotenv";
 import { createTopics } from "./commands/createTopics";
@@ -20,3 +20,11 @@ const client = new Client({
 client.once("ready", () => {
   console.log(`Logged in as ${client.user?.tag}`);
 });
+
+client.on('messageCreate', (message) => {
+  if (message.content === '!ping') {
+    message.reply('Pong!');
+  }
+});
+
+client.login(process.env.TOKEN);
