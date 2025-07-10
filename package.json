@@ -21,6 +21,8 @@
     "dev": "ts-node index.ts",
     "start": "ts-node index.ts",
     "build": "tsc",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "install:prod": "npm install --omit=dev",
+    "heroku-postbuild": "npm install --omit=dev && npm run build"
   }
 }
