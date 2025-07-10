@@ -69,7 +69,11 @@ client.on('messageCreate', async (message) => {
             const textChannel = message.channel as TextChannel;
 
             for (var i = 0; i < topics.length; i++) {
-              await textChannel.setTopic(topics[i]);
+              await textChannel.threads.create({
+                name: topics[i],
+                autoArchiveDuration: 1440,
+                reason: `Criando tópico para RPG ${rpgName}`
+              });
             }
           } else {
             await message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
