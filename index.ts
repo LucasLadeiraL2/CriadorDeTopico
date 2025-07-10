@@ -68,8 +68,8 @@ client.on('messageCreate', async (message) => {
 
             const textChannel = message.channel as TextChannel;
 
-            for (const topic of topics) {
-              await textChannel.setTopic(topic, `${textChannel.name} - ${topic}`);
+            for (var i = 0; i < topics.length; i++) {
+              await textChannel.setTopic(topics[i], `${textChannel.name} - ${topics[i]}`);
             }
           } else {
             await message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
