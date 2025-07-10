@@ -6,7 +6,7 @@ import { createRPG } from "./commands/createRPG";
 import { deleteRPG } from "./commands/deleteRPG";
 import { listRPGs } from "./commands/listRPGs";
 import { help } from "./commands/help";
-//import { updateRPG } from "./commands/updateRPG";
+import { updateRPG } from "./commands/updateRPG";
 
 config();
 
@@ -28,9 +28,7 @@ client.on('messageCreate', async (message) => {
   const MessageContent = message.content.toLowerCase().trim();
   const MessageCommands = MessageContent.split('$');
 
-  if (MessageCommands.length < 2) {
-    return;
-  }
+  if (MessageCommands.length < 2) return;
   
   const firstCommand = MessageCommands[1].trim();
 
@@ -90,6 +88,20 @@ client.on('messageCreate', async (message) => {
     const rpgName = MessageCommands[2].trim();
     if (rpgName) {
       await message.reply(deleteRPG(rpgName, message.author.id));
+    }
+  }
+
+  if (firstCommand === 'update') {
+    const rpgName = MessageCommands[2].trim();
+    if (rpgName) {
+      if (MessageCommands.length == 4) {
+        const topics = MessageCommands[3].trim();
+        if (topics) {
+          await message.reply(updateRPG(rpgName, message.author.id, topics));
+        }
+      } else {
+        await message.reply("Please provide the new topics to update the RPG.");
+      }
     }
   }
 
