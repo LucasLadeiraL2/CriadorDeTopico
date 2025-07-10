@@ -1,7 +1,7 @@
 import db from "./data/database";
-import { Client, GatewayIntentBits, Message } from "discord.js";
+import { Client, GatewayIntentBits, ChannelType, TextChannel } from "discord.js";
 import { config } from "dotenv";
-//import { createTopics } from "./commands/createTopics";
+import { createTopics } from "./commands/createTopics";
 import { createRPG } from "./commands/createRPG";
 //import { deleteRPG } from "./commands/deleteRPG";
 import { listRPGs } from "./commands/listRPGs";
@@ -21,7 +21,7 @@ client.once("ready", () => {
   console.log(`Logged in as ${client.user?.tag}`);
 });
 
-client.on('messageCreate', (message) => {
+client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
 
   const MessageContent = message.content.toLowerCase().trim();
@@ -36,15 +36,51 @@ client.on('messageCreate', (message) => {
   if (firstCommand === 'create') {
     const rpgName = MessageCommands[2].trim();
     if (rpgName) {
-      const topics = MessageCommands[3].trim();
-      if (topics) {
-        message.reply(createRPG(rpgName, message.author.id, topics));
+      if (MessageCommands.length < 4) {
+        const topics = MessageCommands[3].trim();
+        if (topics) {
+          await message.reply(createRPG(rpgName, message.author.id, topics));
+        }
+      } else {
+        if (message.channel.type !== ChannelType.GuildText) {
+          return await message.reply("This command can only be used in text channels.");
+        }
+
+        const sentMessage = await message.channel.send(`Are you sure you want to create the RPG **${rpgName}** topics in channel ${message.channel}? React with ✅ in 4s to confirm.`);
+        sentMessage.react('✅');
+
+        setTimeout(() => {
+          const hasReacted = sentMessage.reactions.cache.get('✅')?.users.cache.has(message.author.id);
+
+          if (hasReacted) {
+            const topics = createTopics(rpgName);
+            
+            if (!topics) {
+              return message.channel.send(`No topics found for RPG **${rpgName}**.`);
+            }
+
+            const textChannel = message.channel as TextChannel;
+
+            topics.forEach(topic => {
+              textChannel.threads.create({
+                name: topic,
+                autoArchiveDuration: Number.MAX_VALUE, // Archive after 60 minutes of inactivity
+                reason: `Creating topic for RPG ${rpgName}`,
+                type: ChannelType.PublicThread,
+                invitable: true,
+                startMessage: `${textChannel.name} - ${topic}`
+              })
+            });
+          } else {
+            message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
+          }
+        }, 4000);
       }
     }
   }
 
   if (firstCommand === 'list') {
-    message.reply(listRPGs());
+    await message.reply(listRPGs());
   }
 });
 
