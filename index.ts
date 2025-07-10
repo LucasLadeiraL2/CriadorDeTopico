@@ -1,11 +1,11 @@
 import db from "./data/database";
 import { Client, GatewayIntentBits } from "discord.js";
 import { config } from "dotenv";
-import { createTopics } from "./commands/createTopics";
-import { createRPG } from "./commands/createRPG";
-import { deleteRPG } from "./commands/deleteRPG";
-import { listRPGs } from "./commands/listRPGs";
-import { updateRPG } from "./commands/updateRPG";
+//import { createTopics } from "./commands/createTopics";
+//import { createRPG } from "./commands/createRPG";
+//import { deleteRPG } from "./commands/deleteRPG";
+//import { listRPGs } from "./commands/listRPGs";
+//import { updateRPG } from "./commands/updateRPG";
 
 config();
 

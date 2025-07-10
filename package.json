@@ -18,8 +18,8 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "start": "node dist/index.js",
+    "dev": "ts-node index.ts",
+    "start": "node index.js",
     "build": "tsc",
     "lint": "eslint src/**/*.ts"
   }
