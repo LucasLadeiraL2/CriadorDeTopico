@@ -25,6 +25,7 @@ client.on('messageCreate', (message) => {
   if (message.author.bot) return;
 
   const MessageContent = message.content.toLowerCase().trim();
+  console.log(`Received Message: ${MessageContent}`);
   const MessageCommands = MessageContent.split('$');
   console.log(`Received Commands: ${MessageCommands}`);
   const firstCommand = MessageCommands[1].trim();
