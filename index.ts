@@ -36,7 +36,7 @@ client.on('messageCreate', async (message) => {
   if (firstCommand === 'create') {
     const rpgName = MessageCommands[2].trim();
     if (rpgName) {
-      if (MessageCommands.length < 4) {
+      if (MessageCommands.length == 4) {
         const topics = MessageCommands[3].trim();
         if (topics) {
           await message.reply(createRPG(rpgName, message.author.id, topics));
