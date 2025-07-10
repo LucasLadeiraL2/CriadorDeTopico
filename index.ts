@@ -50,7 +50,12 @@ client.on('messageCreate', async (message) => {
         sentMessage.react('✅');
 
         setTimeout(() => {
-          const hasReacted = sentMessage.reactions.cache.get('✅')?.users.cache.has(message.author.id);
+          const reaction = sentMessage.reactions.cache.get('✅');
+          if (!reaction) return message.channel.send('Nenhuma reação encontrada.');
+
+          reaction.users.fetch();
+
+          const hasReacted = reaction.users.cache.has(message.author.id);
 
           if (hasReacted) {
             const topics = createTopics(rpgName);
