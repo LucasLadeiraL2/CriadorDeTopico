@@ -6,15 +6,13 @@ interface selectTopics {
 
 function createTopics(abbreviation: string): string[] | null {
     const select = db.prepare(`SELECT topics FROM rpg WHERE abbreviation = ?`);
-    const topics = select.get(abbreviation) as selectTopics | undefined;
+    const results = select.get(abbreviation) as selectTopics | undefined;
 
-    if (!topics) {
+    if (!results) {
         return null;
     }
-    
-    console.log(`Topics for RPG ${abbreviation}: ${topics.topics}`);
-
-    return topics.topics.split('\n').map(topic => topic.trim()).filter(topic => topic !== '');
+    console.log(results.topics);
+    return results.topics.split('\n').map(topic => topic.trim()).filter(topic => topic !== '');
 }
 
 export { createTopics };
