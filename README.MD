@@ -1,5 +1,8 @@
 # Bot Criador de Tópicos
 
+DB - SQLite \
+Linguagem Principal - Typescript
+
 ## Comandos
 ### Run
 ```bash
