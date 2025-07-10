@@ -71,6 +71,8 @@ client.on('messageCreate', async (message) => {
                 autoArchiveDuration: 1440,
                 reason: `Criando tópico para RPG ${rpgName}`
               });
+
+              await new Promise(resolve => setTimeout(resolve, 1000));
             }
           } else {
             await message.channel.send(`You did not confirm the creation of Topics from **${rpgName}** in time.`);
