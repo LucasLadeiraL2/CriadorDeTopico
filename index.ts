@@ -1,4 +1,3 @@
-import db from "./data/database";
 import { Client, GatewayIntentBits, ChannelType, TextChannel } from "discord.js";
 import { config } from "dotenv";
 import { createTopics } from "./commands/createTopics";
@@ -7,6 +6,7 @@ import { deleteRPG } from "./commands/deleteRPG";
 import { listRPGs } from "./commands/listRPGs";
 import { help } from "./commands/help";
 import { updateRPG } from "./commands/updateRPG";
+import { listTopics } from "./commands/listTopics";
 
 config();
 
@@ -81,7 +81,11 @@ client.on('messageCreate', async (message) => {
   }
 
   if (firstCommand === 'list') {
-    await message.reply(listRPGs());
+    if (MessageCommands.length == 3) {
+      await message.reply(listTopics(MessageCommands[2].trim()));
+    } else {
+      await message.reply(listRPGs());
+    }
   }
 
   if (firstCommand === 'delete') {
