@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits, ChannelType, TextChannel } from "discord.js";
 import { config } from "dotenv";
+import express from "express"
 import { createTopics } from "./commands/createTopics";
 import { createRPG } from "./commands/createRPG";
 import { deleteRPG } from "./commands/deleteRPG";
@@ -9,6 +10,18 @@ import { updateRPG } from "./commands/updateRPG";
 import { listTopics } from "./commands/listTopics";
 
 config();
+
+//#region Monitorate
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Online!");
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000");
+});
+//#endregion
 
 const client = new Client({
   intents: [
